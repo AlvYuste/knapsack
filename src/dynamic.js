@@ -17,15 +17,15 @@ const dynamicRecursion = (articles, capacity) => {
 
 const dynamicTable = (articles, capacity) => {
   const n = articles.length;
-  const choices = Array(n).fill(0);
   const table = Array(n).fill();
-
+  // Table accessors
   const getO = (k, j) => (k < 0 || j < 0 ? 0 : table[j][k]);
   const setO = (k, j, v) => (table[j][k] = v);
-  table.forEach((row, j) => {
+  // Filling table
+  table.forEach((_, j) => {
     const { value, weight } = articles[j];
     table[j] = Array(capacity).fill();
-    table[j].forEach((cell, k) => {
+    table[j].forEach((_, k) => {
       const prevO = getO(k, j - 1);
       if (weight > k + 1) {
         setO(k, j, prevO);
@@ -34,8 +34,20 @@ const dynamicTable = (articles, capacity) => {
       }
     });
   });
-  console.log(table);
-  return { solution: getO(capacity - 1, n - 1), choices, optimal: true };
+  // Trace back recursion
+  const traceBack = (k, j) => {
+    if (j < 0) {
+      return [];
+    }
+    if (getO(k, j) === getO(k, j - 1)) {
+      return [...traceBack(k, j - 1), 0];
+    }
+    return [...traceBack(k - articles[j].weight, j - 1), 1];
+  };
+  // Calculate solution
+  const solution = getO(capacity - 1, n - 1);
+  const choices = traceBack(capacity - 1, n - 1);
+  return { solution, choices, optimal: true };
 };
 
 module.exports = {

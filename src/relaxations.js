@@ -1,7 +1,19 @@
-const capacityRelaxation = articles =>
-  articles.reduce((total, { value }) => total + value, 0);
+const getTotals = articles =>
+  articles.reduce(
+    ({ totalValue = 0, totalWeight = 0 }, { value, weight }) => ({
+      totalValue: totalValue + value,
+      totalWeight: totalWeight + weight
+    }),
+    {}
+  );
+
+const capacityRelaxation = articles => getTotals(articles).totalValue;
 
 const linearRelaxation = (articles, capacity) => {
+  const { totalValue = 0, totalWeight = 0 } = getTotals(articles);
+  if (totalWeight <= capacity) {
+    return totalValue;
+  }
   // Sort items by its value density
   const sortedArticles = articles.sort((a, b) => a.density <= b.density);
   const result = { value: 0, weight: 0 };

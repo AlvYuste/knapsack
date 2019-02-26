@@ -1,5 +1,9 @@
-const io = require("./io");
-const { densityGreedy, quantityGreedy, valuableGreedy } = require("./greedy");
+const io = require("../../src/io");
+const {
+  densityGreedy,
+  quantityGreedy,
+  valuableGreedy
+} = require("../../src/greedy");
 
 const articles = io.prepareItems([
   { weight: 2, value: 1 },

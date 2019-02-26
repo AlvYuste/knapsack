@@ -1,5 +1,5 @@
-const io = require("./io");
-const { dynamicRecursion, dynamicTable } = require("./dynamic");
+const io = require("../../src/io");
+const { dynamicRecursion, dynamicTable } = require("../../src/dynamic");
 
 const articles = io.prepareItems([
   { weight: 4, value: 5 },

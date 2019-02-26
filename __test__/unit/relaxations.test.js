@@ -1,5 +1,8 @@
-const { prepareItems } = require("./io");
-const { capacityRelaxation, linearRelaxation } = require("./relaxations");
+const { prepareItems } = require("../../src/io");
+const {
+  capacityRelaxation,
+  linearRelaxation
+} = require("../../src/relaxations");
 
 const articles = prepareItems([
   { weight: 5, value: 45 },

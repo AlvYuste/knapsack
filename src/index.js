@@ -1,8 +1,9 @@
 const io = require("./io");
-const { densityGreedy } = require("./greedy");
+const { deppFirst } = require("./branching");
+const { linearRelaxation, capacityRelaxation } = require("./relaxations");
 
 const solve = (articles, capacity) => {
-  return densityGreedy(articles, capacity);
+  return deppFirst(capacityRelaxation)(articles, capacity);
 };
 
 const main = async args => {
