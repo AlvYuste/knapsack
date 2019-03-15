@@ -1,5 +1,5 @@
 const { prepareItems } = require("../../src/io");
-const { deppFirst } = require("../../src/branching");
+const { deepFirst } = require("../../src/branching");
 const {
   linearRelaxation,
   capacityRelaxation
@@ -14,7 +14,7 @@ const capacity = 10;
 
 test("Deep first with capacity relaxation works as expected", () => {
   const mockFn = jest.fn(capacityRelaxation);
-  const { solution, choices, optimal } = deppFirst(mockFn)(articles, capacity);
+  const { solution, choices, optimal } = deepFirst(mockFn)(articles, capacity);
   expect(solution).toEqual(80);
   expect(choices).toEqual([1, 0, 1]);
   expect(optimal).toBeTruthy();
@@ -22,7 +22,7 @@ test("Deep first with capacity relaxation works as expected", () => {
 });
 test("Deep first with linear relaxation works as expected", () => {
   const mockFn = jest.fn(linearRelaxation);
-  const { solution, choices, optimal } = deppFirst(mockFn)(articles, capacity);
+  const { solution, choices, optimal } = deepFirst(mockFn)(articles, capacity);
   expect(solution).toEqual(80);
   expect(choices).toEqual([1, 0, 1]);
   expect(optimal).toBeTruthy();

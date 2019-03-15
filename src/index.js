@@ -1,9 +1,9 @@
 const io = require("./io");
-const { deppFirst } = require("./branching");
+const { deepFirst, bestFirst } = require("./branching");
 const { linearRelaxation, capacityRelaxation } = require("./relaxations");
 
 const solve = (articles, capacity) => {
-  return deppFirst(capacityRelaxation)(articles, capacity);
+  return bestFirst(linearRelaxation)(articles, capacity);
 };
 
 const main = async args => {
